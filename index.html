@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smtp-code</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+
+<div class="block-code">
+    <code>
+
+use PHPMailer\PHPMailer\PHPMailer;
+</br>
+use PHPMailer\PHPMailer\SMTP;
+</br>
+use PHPMailer\PHPMailer\Exception;
+</br>
+<span>// require_once "vendor/autoload.php";</span>
+</br>
+require 'phpmailer/PHPMailer.php';
+</br>
+require 'phpmailer/SMTP.php';
+</br>
+require 'phpmailer/Exception.php';
+</br>
+$mail->CharSet = 'UTF-8';
+</br>
+$name = $_POST['user_name'];
+</br>
+$phone = $_POST['user_phone'];
+</br>
+$email = $_POST['user_email'];
+</br>
+$mail = new PHPMailer(true);
+</br>
+<span>//Включите отладку SMTP.</span>
+</br>
+$mail->SMTPDebug = 3; 
+</br>                     
+<span>//Настройте PHPMailer на использование SMTP.</span>
+</br>
+$mail->isSMTP();   
+</br>     
+<span>//Установить имя хоста SMTP</span>  
+</br>  
+$mail->Host = "smtp.gmail.com";
+</br>
+<span>//Установите значение true, если хост SMTP требует аутентификации для отправки электронной почты.</span>
+</br>
+$mail->SMTPAuth = true;  
+</br>            
+<span>//Укажите имя пользователя и пароль</span>
+</br>
+$mail->Username = "avantinfomail@gmail.com"; 
+</br>  
+$mail->Password = "svfdvd5464gdfg"; 
+</br> 
+<span>//Если SMTP требует шифрования TLS, установите его</span>
+</br>
+$mail->SMTPSecure = "tls";  
+</br>  
+<span>//Установите порт TCP для подключения к</span>
+$mail->Port = 587;                                   
+</br>
+$mail->From = "v.nosov@polarfox-soft.com";
+</br>
+$mail->FromName = "Vitaliy";
+</br>
+$mail->addAddress("mailavanttest@gmail.com", "Recepient Name");
+</br>
+$mail->isHTML(true);
+</br>
+$mail->Subject = "Subject Text";
+</br>
+<span>// $mail->Body = "<i>Mail body in HTML</i>";</span>
+</br>
+$mail->Body    = ''.$name . '<br>Оставил заявку, его телефон:' .$phone. '<br>Почта этого пользователя: ' .$email;
+</br>
+$mail->AltBody = "This is the plain text version of the email content";
+</br>
+try {
+    $mail->send();
+    echo "Message has been sent successfully";
+} catch (Exception $e) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
+}
+
+?>
+    </code>
+</div>
+
+
+</body>
+</html>
